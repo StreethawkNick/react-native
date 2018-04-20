@@ -51,6 +51,7 @@ import com.facebook.react.uimanager.UIManagerModule;
 import com.facebook.react.uimanager.events.EventDispatcher;
 import com.facebook.systrace.Systrace;
 import javax.annotation.Nullable;
+import android.util.Log;
 
 /**
  * Default root view for catalyst apps. Provides the ability to listen for size changes so that a UI
@@ -265,7 +266,7 @@ public class ReactRootView extends SizeMonitoringFrameLayout
   @Override
   public void onViewAdded(View child) {
     super.onViewAdded(child);
-
+    Log.e("Native", "onViewAdded()");
     if (mShouldLogContentAppeared) {
       mShouldLogContentAppeared = false;
 
@@ -364,6 +365,7 @@ public class ReactRootView extends SizeMonitoringFrameLayout
    * Fragment's onDestroyView).
    */
   public void unmountReactApplication() {
+	Log.e("Native", "unmountReactApplication()");
     if (mReactInstanceManager != null && mIsAttachedToInstance) {
       mReactInstanceManager.detachRootView(this);
       mIsAttachedToInstance = false;
@@ -372,6 +374,7 @@ public class ReactRootView extends SizeMonitoringFrameLayout
   }
 
   public void onAttachedToReactInstance() {
+	Log.e("Native", "onAttachedToReactInstance()");
     if (mRootViewEventListener != null) {
       mRootViewEventListener.onAttachedToReactInstance(this);
     }
