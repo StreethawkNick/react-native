@@ -10,7 +10,7 @@ import java.util.concurrent.atomic.AtomicInteger;
 
 import android.os.Handler;
 import android.util.SparseArray;
-
+import android.util.Log;
 import com.facebook.infer.annotation.Assertions;
 import com.facebook.react.bridge.ReactContext;
 import com.facebook.react.bridge.UiThreadUtil;
@@ -82,6 +82,7 @@ public class HeadlessJsTaskContext {
    * @return a unique id representing this task instance.
    */
   public synchronized int startTask(final HeadlessJsTaskConfig taskConfig) {
+	Log.e("HeadJsTask", "startTask");
     UiThreadUtil.assertOnUiThread();
     ReactContext reactContext = Assertions.assertNotNull(
       mReactContext.get(),
@@ -112,6 +113,7 @@ public class HeadlessJsTaskContext {
    * @param taskId the unique id returned by {@link #startTask}.
    */
   public synchronized void finishTask(final int taskId) {
+	Log.e("HeadJsTask", "finishTask");
     Assertions.assertCondition(
       mActiveTasks.remove(taskId),
       "Tried to finish non-existent task with id " + taskId + ".");
@@ -135,6 +137,7 @@ public class HeadlessJsTaskContext {
    * called or it times out.
    */
   public synchronized boolean isTaskRunning(final int taskId) {
+	  Log.e("HeadJsTask", "isTaskRunning");
     return mActiveTasks.contains(taskId);
   }
 
